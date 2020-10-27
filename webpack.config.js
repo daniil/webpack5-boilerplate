@@ -1,5 +1,6 @@
 const path = require('path')
 const HtmlWebpackPlugin = require('html-webpack-plugin')
+const { CleanWebpackPlugin } = require('clean-webpack-plugin')
 
 module.exports = {
 
@@ -23,6 +24,20 @@ module.exports = {
       filename: 'index.html', // output file
     }),
     
+    // Will clear out anything in dist folder after each build
+    new CleanWebpackPlugin(),
+
   ],
+
+  module: {
+    rules: [
+      // JavaScript (transpile files using Babel with ES2015+ config + .babelrc custom config)
+      {
+        test: /\.js$/,
+        exclude: /node_modules/,
+        use: ['babel-loader'],
+      },
+    ],
+  },
 
 }
