@@ -1,3 +1,4 @@
+const webpack = require('webpack')
 const path = require('path')
 const HtmlWebpackPlugin = require('html-webpack-plugin')
 const { CleanWebpackPlugin } = require('clean-webpack-plugin')
@@ -15,6 +16,17 @@ module.exports = {
     filename: '[name].bundle.js',
   },
 
+  // Set the config to development mode
+  mode: 'development',
+  devServer: {
+    historyApiFallback: true,
+    contentBase: path.resolve(__dirname, './dist'),
+    open: true, // open browser window automatically
+    compress: true,
+    hot: true, // use HotModuleReplacementPlugin
+    port: 8080,
+  },
+
   plugins: [
 
     // Will add a bundle script file to template file, resolve any variables and output the index.html in dist folder
@@ -26,6 +38,9 @@ module.exports = {
     
     // Will clear out anything in dist folder after each build
     new CleanWebpackPlugin(),
+
+    // Only update what has changed on hot reload
+    new webpack.HotModuleReplacementPlugin(),
 
   ],
 
