@@ -1,4 +1,5 @@
 import example from './images/Fennec_Fox.jpg'
+import './styles/main.scss'
 
 // Create an image with imported image as a src
 const img = document.createElement('img');
